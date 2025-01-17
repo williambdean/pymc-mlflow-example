@@ -22,6 +22,8 @@ Kick them off with `make experiments`. View with `make serve`. Clean up with `ma
 
 Use the `environment.yml` file to create the conda environment. i.e. `conda env create -f environment.yml`.
 
+There are some helper functions in the `utils.py` file which help setup mlflow and define some reused PyMC models.
+
 ## Resources
 
 - [`pymc_marketing.mlflow` module](https://www.pymc-marketing.io/en/latest/api/generated/pymc_marketing.mlflow.html)
