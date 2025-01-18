@@ -46,4 +46,4 @@ dependencies:
 - xarray-einstats[version='>=0.5.1']
 - pip:
   # Install from GitHub repo
-  - git+https://github.com/pymc-labs/pymc-marketing@main
+  - git+https://github.com/pymc-labs/pymc-marketing@8a0b0767
