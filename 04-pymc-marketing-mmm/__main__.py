@@ -54,6 +54,8 @@ def run_experiment(X, y, adstock_config, saturation_config, yearly_seasonality):
             fig, _ = transform.plot_curve(curve)
             mlflow.log_figure(fig, f"{transform.prefix}_curve.png")
 
+        pymc_marketing.mlflow.log_mmm(mmm=mmm)
+
 
 def run_experiments(X, y, combinations):
     for adstock_config, saturation_config, yearly_seasonality in combinations:
