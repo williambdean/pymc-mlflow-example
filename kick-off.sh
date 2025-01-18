@@ -1,4 +1,4 @@
-# # Kick off scripts with the various examples
+# Kick off scripts with the various examples
 python 01-basic-introduction.py
 python 01-basic-introduction.py
 python 01-basic-introduction.py
@@ -12,5 +12,5 @@ python 03-pymc-autologging.py pymc normal
 python 03-pymc-autologging.py numpyro normal
 python 03-pymc-autologging.py numpyro student_t
 
-export PYTHON_PATH=.
+export PYTHONPATH=.
 python 04-pymc-marketing-mmm
