@@ -39,8 +39,18 @@ if __name__ == "__main__":
     mlflow_set_tracking_uri()
     mlflow.set_experiment("03-pymc-autologging")
 
+    sample_kwargs = {"nuts_sampler": nuts_sampler}
+
+    if nuts_sampler == "pymc":
+        callback = pymc_marketing.mlflow.create_log_callback(
+            stats=["energy", "model_logp", "step_size"],
+            parameters=["mu", "sigma_log__"],
+            take_every=100,
+        )
+        sample_kwargs["callback"] = callback
+
     with mlflow.start_run():
         model = define_model(data)
-        idata = pm.sample(nuts_sampler=nuts_sampler, model=model)
+        idata = pm.sample(model=model, **sample_kwargs)
 
         pymc_marketing.mlflow.log_inference_data(idata)
