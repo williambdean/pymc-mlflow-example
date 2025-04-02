@@ -10,16 +10,18 @@ import sys
 import mlflow
 
 from utils import (
-    mlflow_set_tracking_uri,
+    define_gamma_model,
     define_normal_model,
     define_student_t_model,
     generate_normal_data,
+    mlflow_set_tracking_uri,
 )
 
 import pymc as pm
 import numpy as np
 
 import pymc_marketing.mlflow
+
 
 if __name__ == "__main__":
     seed = sum(map(ord, "Logging PyMC model"))
@@ -31,6 +33,7 @@ if __name__ == "__main__":
     define_model = {
         "normal": define_normal_model,
         "student_t": define_student_t_model,
+        "gamma": define_gamma_model,
     }[likelihood]
 
     # Only MLflow related setup
