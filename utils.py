@@ -36,6 +36,18 @@ def define_student_t_model(data: npt.NDArray[np.float_]) -> pm.Model:
     return model
 
 
+def define_gamma_model(data: npt.NDArray[np.float_]) -> pm.Model:
+    coords = {"idx": np.arange(data.size)}
+    with pm.Model(coords=coords) as model:
+        mu = pm.HalfNormal("mu", sigma=1)
+        sigma = pm.HalfNormal("sigma", sigma=1)
+
+        observed = pm.Data("data", data, dims="idx")
+        pm.Gamma("obs", alpha=mu, beta=sigma, observed=observed, dims="idx")
+
+    return model
+
+
 def generate_normal_data(
     n: int,
     rng: np.random.Generator,
