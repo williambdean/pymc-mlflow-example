@@ -11,7 +11,7 @@ def mlflow_set_tracking_uri() -> None:
     mlflow.set_tracking_uri(uri=uri)
 
 
-def define_normal_model(data: npt.NDArray[np.float_]) -> pm.Model:
+def define_normal_model(data: npt.NDArray[np.float64]) -> pm.Model:
     coords = {"idx": np.arange(data.size)}
     with pm.Model(coords=coords) as model:
         mu = pm.Normal("mu", mu=0, sigma=1)
@@ -23,7 +23,7 @@ def define_normal_model(data: npt.NDArray[np.float_]) -> pm.Model:
     return model
 
 
-def define_student_t_model(data: npt.NDArray[np.float_]) -> pm.Model:
+def define_student_t_model(data: npt.NDArray[np.float64]) -> pm.Model:
     coords = {"idx": np.arange(data.size)}
     with pm.Model(coords=coords) as model:
         mu = pm.Normal("mu", mu=0, sigma=1)
@@ -36,7 +36,7 @@ def define_student_t_model(data: npt.NDArray[np.float_]) -> pm.Model:
     return model
 
 
-def define_gamma_model(data: npt.NDArray[np.float_]) -> pm.Model:
+def define_gamma_model(data: npt.NDArray[np.float64]) -> pm.Model:
     coords = {"idx": np.arange(data.size)}
     with pm.Model(coords=coords) as model:
         mu = pm.HalfNormal("mu", sigma=1)
@@ -53,6 +53,6 @@ def generate_normal_data(
     rng: np.random.Generator,
     mu,
     sigma,
-) -> npt.NDArray[np.float_]:
+) -> npt.NDArray[np.float64]:
     dist = pm.Normal.dist(mu=mu, sigma=sigma, shape=n)
     return pm.draw(dist, random_seed=rng)
