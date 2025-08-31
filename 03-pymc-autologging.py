@@ -17,7 +17,7 @@ from utils import (
 import arviz as az
 
 import pymc as pm
-from pymc.testing import mock_sample
+import pymc.testing
 import matplotlib.pyplot as plt
 
 import numpy as np
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     sample_kwargs = {"nuts_sampler": args.nuts_sampler}
 
     if args.mock:
-        pm.sample = mock_sample
+        pm.sample = pymc.testing.mock_sample
 
     if args.nuts_sampler == "pymc":
         callback = pymc_marketing.mlflow.create_log_callback(
