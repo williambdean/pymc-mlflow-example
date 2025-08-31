@@ -9,7 +9,6 @@ Below are a subset of the metrics & parameters:
 
 ![Autologging](./../images/mmm-autolog.png)
 
-And the artifacts that are saved off: 
+And the artifacts that are saved off:
 
 ![Autolog Artifacts](./../images/mmm-autolog-artifacts.png)
-

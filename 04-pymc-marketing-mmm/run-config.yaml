@@ -1,24 +1,24 @@
 ---
 # Configuration for the run. Will produce the product of all the configurations
-adstocks: 
+adstocks:
   - lookup_name: geometric
     priors: {}
     l_max: 10
   - lookup_name: geometric
-    priors: 
+    priors:
       # Change the Geometric Adstock parameter
       # Same as Prior("Beta", alpha=1, beta=10).to_dict()
-      alpha: 
+      alpha:
         dist: Beta
-        kwargs: 
+        kwargs:
           alpha: 1
           beta: 10
     l_max: 10
-saturations: 
+saturations:
   - lookup_name: logistic
     priors: {}
   - lookup_name: hill
-    priors: {} 
-yearly_seasonality: 
+    priors: {}
+yearly_seasonality:
   - 3
   - 7

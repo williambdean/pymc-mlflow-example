@@ -11,7 +11,7 @@ Suggestions or Questions? [Comment on this Issue](https://github.com/pymc-labs/p
 
 ## Scripts
 
-There are four scripts: 
+There are four scripts:
 
 1. [Non-PyMC example showing how to log parameters, metrics, and artifacts to MLflow](./01-basic-introduction.py)
 2. [PyMC example which logs some PyMC related metrics to MLflow](./02-pymc-context.py)
