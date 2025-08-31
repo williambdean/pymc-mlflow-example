@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pymc-mlflow-example"
+version = "0.1.0"
+authors = [
+    { name = "Will Dean", email = "wd60622@gmail.com" }
+]
+description = "Examples integrating PyMC with MLflow"
+requires-python = ">= 3.13"
+dependencies = []
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64", "osx-64"]
+
+[tool.pixi.dependencies]
+pymc = ">=5.25.1,<6"
+mlflow = ">=3.2.0,<4"
+pymc-marketing = ">=0.15.1,<0.16"
+jax = ">=0.7.0,<0.8"
+numpyro = ">=0.19.0,<0.20"
+nutpie = ">=0.15.2,<0.16"
