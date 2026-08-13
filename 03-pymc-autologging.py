@@ -18,7 +18,6 @@ import arviz as az
 
 import pymc as pm
 import pymc.testing
-import matplotlib.pyplot as plt
 
 import numpy as np
 
@@ -88,8 +87,11 @@ if __name__ == "__main__":
 
         pymc_marketing.mlflow.log_inference_data(idata)
 
-        az.plot_forest(
+        pc = az.plot_forest(
             idata,
             var_names=["mu", "sigma"],
+            backend="matplotlib",
         )
-        mlflow.log_figure(plt.gcf(), "forest.png")
+        # PlotCollection has no public figure accessor yet; this is the
+        # idiom arviz-plots itself uses internally.
+        mlflow.log_figure(pc.viz["figure"].item(), "forest.png")
