@@ -1,8 +1,7 @@
 import mlflow
-
-import pymc as pm
 import numpy as np
 import numpy.typing as npt
+import pymc as pm
 
 
 def mlflow_set_tracking_uri() -> None:

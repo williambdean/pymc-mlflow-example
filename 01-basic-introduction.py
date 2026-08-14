@@ -15,7 +15,6 @@ import mlflow
 
 from utils import mlflow_set_tracking_uri
 
-
 # Start up
 # Point to the MLflow server
 mlflow_set_tracking_uri()

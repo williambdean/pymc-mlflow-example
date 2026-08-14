@@ -5,7 +5,14 @@ for the automatic logging of various artifacts and metrics.
 
 """
 
+import argparse
+
+import arviz as az
 import mlflow
+import numpy as np
+import pymc as pm
+import pymc.testing
+import pymc_marketing.mlflow
 
 from utils import (
     define_gamma_model,
@@ -14,18 +21,6 @@ from utils import (
     generate_normal_data,
     mlflow_set_tracking_uri,
 )
-import arviz as az
-
-import pymc as pm
-import pymc.testing
-import matplotlib.pyplot as plt
-
-import numpy as np
-
-import pymc_marketing.mlflow
-
-import argparse
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -88,8 +83,11 @@ if __name__ == "__main__":
 
         pymc_marketing.mlflow.log_inference_data(idata)
 
-        az.plot_forest(
+        pc = az.plot_forest(
             idata,
             var_names=["mu", "sigma"],
+            backend="matplotlib",
         )
-        mlflow.log_figure(plt.gcf(), "forest.png")
+        # PlotCollection has no public figure accessor yet; this is the
+        # idiom arviz-plots itself uses internally.
+        mlflow.log_figure(pc.viz["figure"].item(), "forest.png")

@@ -1,13 +1,15 @@
 ---
-# Configuration for the run. Will produce the product of all the configurations
+# Configuration for the run. Will produce the product of all the configurations.
+# Each entry uses the pymc-marketing >=1.0 serialization format: __type__ holds
+# the fully-qualified class path used by pymc_marketing.serialization.
 adstocks:
-  - lookup_name: geometric
+  - __type__: pymc_marketing.mmm.components.adstock.GeometricAdstock
     priors: {}
     l_max: 10
-  - lookup_name: geometric
+  - __type__: pymc_marketing.mmm.components.adstock.GeometricAdstock
     priors:
       # Change the Geometric Adstock parameter
-      # Same as Prior("Beta", alpha=1, beta=10).to_dict()
+      # Same as pymc_extras.prior.Prior("Beta", alpha=1, beta=10).to_dict()
       alpha:
         dist: Beta
         kwargs:
@@ -15,9 +17,9 @@ adstocks:
           beta: 10
     l_max: 10
 saturations:
-  - lookup_name: logistic
+  - __type__: pymc_marketing.mmm.components.saturation.LogisticSaturation
     priors: {}
-  - lookup_name: hill
+  - __type__: pymc_marketing.mmm.components.saturation.HillSaturation
     priors: {}
 yearly_seasonality:
   - 3

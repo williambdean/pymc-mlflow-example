@@ -8,20 +8,18 @@ What would someone be interested in logging?
 
 """
 
-import mlflow
-
 import os
 
+import arviz as az
+import mlflow
+import numpy as np
+import pymc as pm
+
 from utils import (
-    mlflow_set_tracking_uri,
     define_normal_model,
     generate_normal_data,
+    mlflow_set_tracking_uri,
 )
-
-import arviz as az
-import pymc as pm
-import numpy as np
-
 
 seed = sum(map(ord, "Logging PyMC model"))
 rng = np.random.default_rng(seed)

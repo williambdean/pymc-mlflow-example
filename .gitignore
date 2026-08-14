@@ -2,6 +2,10 @@
 mlruns/
 mlruns.db
 
+# graphviz byproducts left in cwd by model-graph autologging
+model_graph
+model_graph.pdf
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
