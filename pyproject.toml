@@ -16,27 +16,19 @@ dependencies = []
 channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64", "osx-64"]
 
-# Pinning philosophy: version floors on packages the scripts import or use
-# directly; upper caps are delegated to pymc-marketing's own constraints
-# except where a cap documents a real local requirement.
 [tool.pixi.dependencies]
-# 3.14 breaks the resolved pydantic (needs >=2.12); the pymc stack targets 3.13
 python = ">=3.13,<3.14"
-# pinned to 6.0.x because pymc-marketing 1.0 requires pymc<6.1
-pymc = ">=6.0.1,<6.1"
-mlflow = ">=3.15.1,<4"
-pymc-marketing = ">=1.0.0,<2"
-# TODO: bump to ">=1.3,<2" once the arviz 1.3 metapackage lands on conda-forge
 arviz = ">=1.2,<2"
+cxx-compiler = "*"
+h5netcdf = ">=1.3"
 jax = ">=0.7"
+matplotlib = ">=3.9"
+mlflow = ">=3.15.1,<4"
 numpyro = ">=0.20"
 nutpie = ">=0.16.10"
-matplotlib = ">=3.9"
 pandas = ">=2.1,<3"
-pyyaml = ">=6"
+pre-commit = ">=4.6.2,<5"
 psutil = ">=5.9"
-# netcdf backend for saving inference data (arviz 1.x no longer pulls one in)
-h5netcdf = ">=1.3"
-# matched C toolchain for pytensor's C backend (pymc 6 no longer ships one;
-# without it the env's clang++ links against the system ld and fails)
-cxx-compiler = "*"
+pymc = ">=6.0.1,<6.1"
+pymc-marketing = ">=1.0.0,<2"
+pyyaml = ">=6"

@@ -4,12 +4,9 @@ from itertools import product
 from pathlib import Path
 
 import mlflow
-
-import yaml
-
 import pandas as pd
-
 import pymc_marketing.mlflow
+import yaml
 from pymc_marketing.mmm import MMM
 from pymc_marketing.serialization import serialization
 
@@ -74,16 +71,12 @@ def run_experiment(split: Split, adstock_config, saturation_config, yearly_seaso
     )
 
     with mlflow.start_run():
-        # The 1.0 MMM max-scales the target internally and no longer
-        # inverse-transforms predictions; register original-scale
-        # deterministics before fitting so metrics use the data scale.
         mmm.build_model(split.train.X, split.train.y)
         mmm.add_original_scale_contribution_variable(
             var=[
                 "channel_contribution",
                 "control_contribution",
                 "intercept_contribution",
-                "yearly_seasonality_contribution",
                 "y",
             ]
         )
