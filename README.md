@@ -12,8 +12,6 @@ from `pymc-marketing<1.0`, see the
 
 ![Autologging](./images/autolog.png)
 
-*(screenshot from pymc-marketing 0.15; the exact autologged surface differs slightly in 1.0)*
-
 Suggestions or Questions? [Comment on this Issue](https://github.com/pymc-labs/pymc-marketing/issues/938)
 
 ## Environment (pixi)

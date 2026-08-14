@@ -36,9 +36,7 @@ facts about a version. Load it with:
 mlflow.pyfunc.load_model("models:/pymc-marketing-mmm@champion")
 ```
 
-Below are a subset of the metrics & parameters
-(screenshots from pymc-marketing 0.15; the exact autologged surface differs
-slightly in 1.0):
+Below are a subset of the metrics & parameters:
 
 ![Autologging](./../images/mmm-autolog.png)
 
