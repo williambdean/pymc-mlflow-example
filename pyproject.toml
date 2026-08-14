@@ -16,6 +16,9 @@ dependencies = []
 channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64", "osx-64"]
 
+[tool.pixi.activation.env]
+PYTHONPATH = "$PIXI_PROJECT_ROOT"
+
 [tool.pixi.dependencies]
 python = ">=3.13,<3.14"
 arviz = ">=1.2,<2"

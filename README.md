@@ -34,6 +34,10 @@ All `make` targets wrap their commands with `pixi run`, so there is no need to
 activate anything — but they must be run **from the repository root**, since
 the MLflow tracking database and artifact paths are relative.
 
+The environment also puts the project root on `PYTHONPATH`
+(`[tool.pixi.activation.env]` in `pyproject.toml`) so that the shared
+[utils.py](./utils.py) is importable from every example.
+
 ## MLflow server
 
 ### Spin it up
@@ -119,14 +123,10 @@ This wraps `pixi run bash ./kick-off.sh` — you can also call
 04 once, which by itself fits the whole model grid. That comes out to 20 MLflow
 runs spread over the four experiments.
 
-Two things worth knowing:
-
-- The `03-pymc-autologging.py pymc gamma` line is *meant* to fail — the
-  generated data contains negative values, which a Gamma likelihood cannot
-  accommodate. It is there so you can see what a failed run looks like in
-  MLflow.
-- The script does `export PYTHONPATH=.` before invoking 04 (see
-  [the gotchas below](#gotchas)).
+One thing worth knowing: the `03-pymc-autologging.py pymc gamma` line is
+*meant* to fail — the generated data contains negative values, which a Gamma
+likelihood cannot accommodate. It is there so you can see what a failed run
+looks like in MLflow.
 
 Since the whole batch fits real models, expect it to take a while. Stopping the
 MLflow server before a large batch avoids SQLite writer contention.
@@ -137,12 +137,12 @@ MLflow server before a large batch avoids SQLite writer contention.
 pixi run python 01-basic-introduction.py
 pixi run python 02-pymc-context.py
 pixi run python 03-pymc-autologging.py <nuts_sampler> <likelihood> [--mock]
-PYTHONPATH=. pixi run python 04-pymc-marketing-mmm [--config <path>]
+pixi run python 04-pymc-marketing-mmm [--config <path>]
 ```
 
 Scripts 01 and 02 take no arguments.
 
-Script [03](./03-pymc-autologging.py) takes two positional arguments:
+Script 03 takes two positional arguments:
 
 - `nuts_sampler`: one of `pymc`, `nutpie`, `numpyro`. Choosing `pymc`
   additionally attaches a callback that logs sampler stats every 100 draws.
@@ -155,27 +155,16 @@ actually sampling — handy for iterating on the logging code quickly:
 pixi run python 03-pymc-autologging.py nutpie normal --mock
 ```
 
-Script [04](./04-pymc-marketing-mmm) is run as a directory module and accepts
-`--config`, defaulting to
-[run-config.yaml](./04-pymc-marketing-mmm/run-config.yaml). It fits the product
-of the `adstocks`, `saturations`, and `yearly_seasonality` entries in that file
-(currently 2 x 2 x 2 = 8 models, one MLflow run each) and downloads the example
-dataset over the network.
-
-### Gotchas
-
-- **Run everything from the repository root.** `mlflow_set_tracking_uri` in
-  [utils.py](./utils.py) points at `sqlite:///mlruns.db`, a relative path, and
-  artifacts are resolved relative to it as well.
-- **`PYTHONPATH=.` is required for script 04.** Running a directory as a module
-  puts `04-pymc-marketing-mmm/` on `sys.path` rather than the repository root,
-  so the shared `from utils import ...` would otherwise fail.
+Script 04 is run as a directory module and accepts `--config`, defaulting to
+`run-config.yaml`. It fits the product of the `adstocks`, `saturations`, and
+`yearly_seasonality` entries in that file (currently 2 x 2 x 2 = 8 models, one
+MLflow run each) and downloads the example dataset over the network.
 
 Each script writes to its own MLflow experiment: `01-basis-introduction`,
 `02-pymc-context`, `03-pymc-autologging`, and `04-pymc-marketing-mmm`.
 
 View the results with `make serve` and reset the sandbox with `make clean_up`,
-both covered below.
+both covered above.
 
 ## Resources
 
