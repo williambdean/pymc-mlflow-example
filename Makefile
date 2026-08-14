@@ -4,7 +4,7 @@ experiments:  ## Run the experiments
 	pixi run bash ./kick-off.sh
 
 serve:  ## Start the mlflow server
-	pixi run mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns
+	pixi run mlflow server --backend-store-uri sqlite:///mlruns.db --default-artifact-root ./mlruns --port 5001
 
 prune:  ## Hard-delete soft-deleted MLflow runs/experiments (stop the server first)
 	pixi run mlflow gc --tracking-uri sqlite:///mlruns.db --backend-store-uri sqlite:///mlruns.db
